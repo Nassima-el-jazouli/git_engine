@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import User from './User';
+import SearchUsers from './SearchUsers';
 
 export class Users extends Component {
 
@@ -9,27 +10,6 @@ export class Users extends Component {
   
     this.state = {
        users: [
-      {
-        login: "mojombo",
-        id: 1,
-        avatar_url: "https://avatars.githubusercontent.com/u/1?v=4",
-        html_url: "https://github.com/mojombo",
-        repos_url: "https://api.github.com/users/mojombo/repos"
-      },
-      {
-        login: "defunkt",
-        id: 2,
-        avatar_url: "https://avatars.githubusercontent.com/u/2?v=4",
-        html_url: "https://github.com/defunkt",
-        repos_url: "https://api.github.com/users/defunkt/repos"
-      },
-      {
-        login: "pjhyett",
-        id: 3,
-        avatar_url: "https://avatars.githubusercontent.com/u/3?v=4",
-        html_url: "https://github.com/pjhyett",
-        repos_url: "https://api.github.com/users/pjhyett/repos"
-      }
     ]
     }
   }
@@ -42,6 +22,17 @@ export class Users extends Component {
              })
         })
   }
+  searchUsersFromGit = (data) => {
+    if(data != ''){
+        axios.get(`https://api.github.com/search/users?q=${data}`)
+              .then(response => {
+                    this.setState({
+                        users: Response.data.items
+                    })
+                  console.log(response)
+                })
+        }
+    }
 
   componentDidMount() {
     this.getUsers();
@@ -49,11 +40,17 @@ export class Users extends Component {
   render() {
     return (
       <div>
-        <br /><br />
-            <div className='row'>
+        <div className="row">
+            <div className="col col-md-12">
+                <SearchUsers />
+            </div>
+        </div>
+        <br />
+            <div className='row my-2'>
             {this.state.users.map(user => (
-                <div className="col col-md-4 col-lg-2 col-xs-10">
-                    <User user={user}/>
+                <div className="col col-md-4 col-lg-2 col-xs-10" key={user.id}>
+                    <SearchUsers getUserSearch={this.componentDidCatchsearchUsersFromGit} />
+                    <User user={user} />
                 </div>
             ))}
             </div>

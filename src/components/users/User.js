@@ -2,15 +2,18 @@ import React, { Component } from 'react'
 
 export class User extends Component {
   render() {
+
+    const {  login, avatar_url, html_url, repos_url } = this.props.user;
+
     return (
       <div>
         <div className="card">
-                <img className="card-img-top" src={this.props.user.avatar_url} alt=""/>
+                <img className="card-img-top" src={avatar_url} alt=""/>
                     <div className="card-body">
-                        <h4 className="card-title">{this.props.user.login}</h4>
+                        <h4 className="card-title">{login}</h4>
                         <p className="card-text">
-                            <a href={this.props.user.html_url} className='btn btn-success'>Show More...</a>
-                            <a href={this.props.user.repos_url} className='btn btn-secondary'>Repositories</a>
+                            <a href={html_url} className='btn btn-success'>Show More...</a>
+                            <a href={repos_url} className='btn btn-secondary'>Repositories</a>
                         </p>
                 </div>
         </div>
