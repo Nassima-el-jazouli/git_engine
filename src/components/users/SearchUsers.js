@@ -20,10 +20,10 @@ export class SearchUsers extends Component {
   render() {
     const{search} = this.state;
     return (
-    <form onSubmit={this.searchUsers}>
+    <form>
          <div className="form-group">
-         <input onChange={this.handleForm} valur={search} placeholder='Search users ...' id="search"type="text"className="form-control"/>
-        </div>
+         <input onChange={this.handleForm} placeholder='Search users ...' id="search"type="text"className="form-control" />
+         </div>
          <button className="btn btn-danger btn-block">Search</button>
     </form>
       

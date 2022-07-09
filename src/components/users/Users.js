@@ -27,7 +27,7 @@ export class Users extends Component {
         axios.get(`https://api.github.com/search/users?q=${data}`)
               .then(response => {
                     this.setState({
-                        users: Response.data.items
+                      searchs: Response.data.items
                     })
                   console.log(response)
                 })
@@ -40,16 +40,10 @@ export class Users extends Component {
   render() {
     return (
       <div>
-        <div className="row">
-            <div className="col col-md-12">
-                <SearchUsers />
-            </div>
-        </div>
         <br />
             <div className='row my-2'>
             {this.state.users.map(user => (
-                <div className="col col-md-4 col-lg-2 col-xs-10" key={user.id}>
-                    <SearchUsers getUserSearch={this.componentDidCatchsearchUsersFromGit} />
+                <div className="col col-md-4 col-lg-2 col-xs-10">
                     <User user={user} />
                 </div>
             ))}
